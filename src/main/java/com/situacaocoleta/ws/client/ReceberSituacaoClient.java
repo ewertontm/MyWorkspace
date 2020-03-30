@@ -51,7 +51,7 @@ public class ReceberSituacaoClient {
                   factory.createSecuritySoapHeaders();
 
               JAXBElement<SecuritySoapHeaders> headers =
-                  factory.createUsernameToken(listFlightsSoapHeaders);
+                  factory.createSecurity(listFlightsSoapHeaders);
 
               // create a marshaller
               JAXBContext context = JAXBContext.newInstance(SecuritySoapHeaders.class);

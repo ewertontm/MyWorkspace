@@ -25,18 +25,18 @@
         </xs:sequence>
       </xs:complexType>
 
-      <xs:element name="messageHeader" type="xsReceberSituacao:SoapHeaders" />
+      <xs:element name="usernameToken" type="xsReceberSituacao:SoapHeaders" />
       <xs:complexType name="SoapHeaders">
-        <xs:sequence>
-          <xs:element name="codigoPerfilAgente" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-
-      <xs:element name="usernameToken" type="xsReceberSituacao:SecuritySoapHeaders" />
-      <xs:complexType name="SecuritySoapHeaders">
         <xs:sequence>
           <xs:element name="usuario" type="xs:string" />
           <xs:element name="senha" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:element name="security" type="xsReceberSituacao:SecuritySoapHeaders" />
+      <xs:complexType name="SecuritySoapHeaders">
+        <xs:sequence>
+          <xs:element name="usernameToken" type="xsReceberSituacao:SoapHeaders" />          
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
@@ -50,11 +50,11 @@
     <wsdl:part name="body" element="xsReceberSituacao:listFlightsResponse" />
   </wsdl:message>
 
-  <wsdl:message name="usernameToken">
-    <wsdl:part name="header" element="xsReceberSituacao:usernameToken" />
+  <wsdl:message name="security">
+    <wsdl:part name="header" element="xsReceberSituacao:security" />
   </wsdl:message>
   
-  <wsdl:message name="messageHeader">
+  <wsdl:message name="usernameToken">
     <wsdl:part name="header" element="xsReceberSituacao:messageHeader" />
   </wsdl:message>
 
@@ -70,10 +70,7 @@
       transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="situacaoColeta">
       <wsdl:input>
-        <soap:header use="literal" part="header"
-          message="tns:usernameToken"></soap:header>
-          <soap:header use="literal" part="header"
-          message="tns:messageHeader"></soap:header>
+        <soap:header use="literal" part="header" message="tns:security"></soap:header>
         <soap:body parts="body" use="literal" />
       </wsdl:input>
       <wsdl:output>
