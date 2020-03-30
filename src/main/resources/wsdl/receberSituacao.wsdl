@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://situacaocoleta.com/ReceberSituacao.wsdl11"
+  xmlns:tns="http://situacaocoleta.com/ReceberSituacao.wsdl11" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsReceberSituacao="http://situacaocoleta.com/ReceberSituacao.xsd"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+  <wsdl:types>
+    <xs:schema xmlns:xsReceberSituacao="http://situacaocoleta.com/ReceberSituacao.xsd"
+      targetNamespace="http://situacaocoleta.com/ReceberSituacao.xsd">
+
+      <xs:element name="situacaoColetaRequest" type="xsReceberSituacao:tListFlights" />
+      <xs:complexType name="tListFlights">
+        <xs:sequence>          
+          <xs:element name="codigo" type="xs:string" />
+          <xs:element name="descricao" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:element name="situacaoColetaResponse" type="xsReceberSituacao:tFlightsResponse" />
+      <xs:complexType name="tFlightsResponse">
+        <xs:sequence>
+          <xs:element name="codigo" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="descricao" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="ticket" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:element name="messageHeader" type="xsReceberSituacao:SoapHeaders" />
+      <xs:complexType name="SoapHeaders">
+        <xs:sequence>
+          <xs:element name="codigoPerfilAgente" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:element name="usernameToken" type="xsReceberSituacao:SecuritySoapHeaders" />
+      <xs:complexType name="SecuritySoapHeaders">
+        <xs:sequence>
+          <xs:element name="usuario" type="xs:string" />
+          <xs:element name="senha" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+
+  <wsdl:message name="situacaoColetaRequest">
+    <wsdl:part name="body" element="xsReceberSituacao:situacaoColetaRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="situacaoColetaResponse">
+    <wsdl:part name="body" element="xsReceberSituacao:listFlightsResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="usernameToken">
+    <wsdl:part name="header" element="xsReceberSituacao:usernameToken" />
+  </wsdl:message>
+  
+  <wsdl:message name="messageHeader">
+    <wsdl:part name="header" element="xsReceberSituacao:messageHeader" />
+  </wsdl:message>
+
+  <wsdl:portType name="ReceberSituacao">
+    <wsdl:operation name="situacaoColeta">
+      <wsdl:input message="tns:situacaoColetaRequest" />
+      <wsdl:output message="tns:situacaoColetaResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="ReceberSituacaoSoap" type="tns:ReceberSituacao">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="situacaoColeta">
+      <wsdl:input>
+        <soap:header use="literal" part="header"
+          message="tns:usernameToken"></soap:header>
+          <soap:header use="literal" part="header"
+          message="tns:messageHeader"></soap:header>
+        <soap:body parts="body" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="body" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

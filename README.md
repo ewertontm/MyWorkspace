@@ -1,0 +1,1 @@
+Receber situacao de coleta WS

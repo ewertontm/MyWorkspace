@@ -1,0 +1,5 @@
+client:
+  default-uri: http://localhost:9090/chicoh/ws/
+
+server:
+  port: 9090
