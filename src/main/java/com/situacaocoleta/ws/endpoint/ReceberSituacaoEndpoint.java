@@ -31,6 +31,7 @@ public class ReceberSituacaoEndpoint {
 
 		String username = "";
 		String password = "";
+		String ticket  = "";
 
 		try {
 			// create an unmarshaller
@@ -45,6 +46,7 @@ public class ReceberSituacaoEndpoint {
 			SecuritySoapHeaders requestSoapHeaders = headers.getValue();
 			username = requestSoapHeaders.getUsernameToken().getUsuario();
 			password = requestSoapHeaders.getUsernameToken().getSenha();
+			ticket = request.getValue().getTicket();
 
 		} catch (Exception e) {
 			LOGGER.error("error during unmarshalling of the SOAP headers", e);
@@ -59,7 +61,7 @@ public class ReceberSituacaoEndpoint {
 			
 			LOGGER.info(response.getCodigo().get(0).toString());
 			LOGGER.info(response.getDescricao().get(0).toString());
-			LOGGER.info(response.getTicket().get(0).toString());
+			LOGGER.info(ticket);
 			
 		} else {
 			response.getCodigo().add("422");
