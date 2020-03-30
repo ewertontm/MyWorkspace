@@ -17,6 +17,7 @@
         </xs:sequence>
       </xs:complexType>
 
+
       <xs:element name="situacaoColetaResponse" type="xsReceberSituacao:tFlightsResponse" />
       <xs:complexType name="tFlightsResponse">
         <xs:sequence>
