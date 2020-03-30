@@ -43,8 +43,8 @@ public class ReceberSituacaoEndpoint {
 
 			// get the header values
 			SecuritySoapHeaders requestSoapHeaders = headers.getValue();
-			username = requestSoapHeaders.getUsuario();
-			password = requestSoapHeaders.getSenha();
+			username = requestSoapHeaders.getUsernameToken2().getUsuario();
+			password = requestSoapHeaders.getUsernameToken2().getSenha();
 
 		} catch (Exception e) {
 			LOGGER.error("error during unmarshalling of the SOAP headers", e);
