@@ -13,6 +13,7 @@
         <xs:sequence>          
           <xs:element name="codigo" type="xs:string" />
           <xs:element name="descricao" type="xs:string" />
+          <xs:element name="ticket" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
 
