@@ -17,12 +17,12 @@
         </xs:sequence>
       </xs:complexType>
 
+
       <xs:element name="situacaoColetaResponse" type="xsReceberSituacao:tFlightsResponse" />
       <xs:complexType name="tFlightsResponse">
         <xs:sequence>
           <xs:element name="codigo" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
           <xs:element name="descricao" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
-          <xs:element name="ticket" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
       </xs:complexType>
 
